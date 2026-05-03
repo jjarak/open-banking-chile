@@ -528,12 +528,7 @@ async function scrapeScotiabank(session: BrowserSession, options: ScraperOptions
           try {
             clickedConsultar = await frame.evaluate(() => {
               for (const el of document.querySelectorAll("a, button, span, div")) {
-                const inputs = Array.from(document.querySelectorAll(
-    'input[type="text"], input:not([type])'
-  ) as NodeListOf<HTMLInputElement>).filter(el =>
-    el.offsetParent !== null &&
-    !el.disabled
-  ) as HTMLInputElement[];
+                const inputs = Array.from(document.querySelectorAll('input[type="text"], input:not([type])') as NodeListOf<HTMLInputElement>).filter(el => el.offsetParent !== null && !el.disabled) as HTMLInputElement[];
                 if (text.includes("consultar cartola") && text.length < 40) {
                   (el as HTMLElement).click(); return true;
                 }
