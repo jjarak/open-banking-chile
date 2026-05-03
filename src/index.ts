@@ -7,7 +7,6 @@ import edwards from "./banks/edwards.js";
 import falabella from "./banks/falabella.js";
 import itau from "./banks/itau.js";
 import santander from "./banks/santander.js";
-import scotiabank from "./banks/scotiabank.js";
 import type { BankScraper } from "./types.js";
 
 /** Registro de todos los bancos disponibles */
