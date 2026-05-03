@@ -19,8 +19,7 @@ export const banks: Record<string, BankScraper> = {
   edwards,
   falabella,
   itau,
-  santander,
-  scotiabank,
+  santander
 };
 
 /** Lista de bancos soportados */
@@ -61,4 +60,3 @@ export { default as falabella } from "./banks/falabella.js";
 export { default as itau } from "./banks/itau.js";
 export { default as santander } from "./banks/santander.js";
 export { default as bancosecurity } from "./banks/bancosecurity.js";
-export { default as scotiabank } from "./banks/scotiabank.js";
