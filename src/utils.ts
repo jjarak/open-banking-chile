@@ -134,8 +134,9 @@ export function parseChileanAmount(text: string): number {
  * Normaliza fechas a formato DD-MM-YYYY.
  * Soporta: dd/mm/yyyy, dd.mm.yyyy, dd-mm-yyyy, dd/mm, "9 mar 2026".
  */
-export function normalizeDate(raw: string): string {
-  const value = raw.trim();
+export function normalizeDate(raw: string | null | undefined): string {
+  if (raw == null) return "";
+  const value = String(raw).trim();
 
   // dd/mm/yyyy, dd.mm.yyyy, dd-mm-yyyy (con año 2 o 4 dígitos)
   const fullMatch = value.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})$/);

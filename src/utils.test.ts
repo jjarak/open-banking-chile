@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { DebugLog, deduplicateMovements } from "./utils.js";
+import { DebugLog, deduplicateMovements, normalizeDate } from "./utils.js";
 import { MOVEMENT_SOURCE } from "./types.js";
 import type { BankMovement } from "./types.js";
 
@@ -116,5 +116,24 @@ describe("deduplicateMovements", () => {
     const b = movement({ description: "B", balance: 200 });
     const result = deduplicateMovements([a, b, a]);
     expect(result.map((m) => m.description)).toEqual(["A", "B"]);
+  });
+});
+
+// ─── normalizeDate ────────────────────────────────────────────────────
+
+describe("normalizeDate", () => {
+  it("normalizes dd/mm/yyyy to dd-mm-yyyy", () => {
+    expect(normalizeDate("9/3/2026")).toBe("09-03-2026");
+  });
+
+  it("returns empty string for null", () => {
+    // Algunos endpoints del banco devuelven fechaTransaccionString: null
+    // para cargos/abonos (TEF, intereses, etc.). normalizeDate debe tolerarlo
+    // sin lanzar TypeError, para no abortar la extracción del estado de cuenta.
+    expect(normalizeDate(null as unknown as string)).toBe("");
+  });
+
+  it("returns empty string for undefined", () => {
+    expect(normalizeDate(undefined as unknown as string)).toBe("");
   });
 });
